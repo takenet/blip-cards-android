@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/boxBlackColor"
-    tools:context="ai.blip.blip.activities.VideoActivity">
+    tools:context="ai.blip.cards.activities.VideoActivity">
 
     <VideoView
         android:id="@+id/videoView"

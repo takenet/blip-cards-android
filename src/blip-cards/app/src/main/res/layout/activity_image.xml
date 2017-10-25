@@ -4,9 +4,9 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/boxBlackColor"
-    tools:context="ai.blip.blip.activities.ImageActivity">
+    tools:context="ai.blip.cards.activities.ImageActivity">
 
-    <ai.blip.blip.widget.ZoomView
+    <ai.blip.cards.widget.ZoomView
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
@@ -16,6 +16,6 @@
             android:layout_height="match_parent"
             android:scaleType="fitCenter" />
 
-    </ai.blip.blip.widget.ZoomView>
+    </ai.blip.cards.widget.ZoomView>
 
 </RelativeLayout>

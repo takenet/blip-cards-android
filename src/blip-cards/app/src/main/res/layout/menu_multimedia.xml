@@ -84,7 +84,7 @@
         android:layout_below="@+id/main_box"
         android:orientation="vertical">
 
-        <ai.blip.blip.control.ExpandedListView
+        <ai.blip.cards.control.ExpandedListView
             android:id="@+id/options_media"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
