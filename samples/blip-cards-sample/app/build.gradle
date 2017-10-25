@@ -1,0 +1,48 @@
+apply plugin: 'com.android.application'
+
+ext {
+    SUPPORT_LIBRARY_VERSION = '26.+'
+    LIME_VERSION = '1.1.27'
+}
+
+android {
+    compileSdkVersion 26
+    buildToolsVersion "26.0.1"
+    defaultConfig {
+        applicationId "ai.blip.bliptest"
+        minSdkVersion 15
+        targetSdkVersion 26
+        versionCode 1
+        versionName "1.0"
+        testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
+    }
+    packagingOptions {
+        exclude 'META-INF/ASL2.0'
+        exclude 'META-INF/LICENSE'
+        exclude 'META-INF/NOTICE'
+    }
+    buildTypes {
+        release {
+            minifyEnabled false
+            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+        }
+    }
+}
+
+dependencies {
+    compile fileTree(include: ['*.jar'], dir: 'libs')
+    androidTestCompile('com.android.support.test.espresso:espresso-core:2.2.2', {
+        exclude group: 'com.android.support', module: 'support-annotations'
+    })
+    compile "com.android.support:appcompat-v7:$SUPPORT_LIBRARY_VERSION"
+    compile 'com.android.support.constraint:constraint-layout:1.0.2'
+    compile 'com.android.support:design:26.+'
+    compile "org.limeprotocol:lime-java-core:$LIME_VERSION"
+    compile "org.limeprotocol:lime-java-messaging:$LIME_VERSION"
+    compile 'com.pnikosis:materialish-progress:1.5'
+    compile 'com.github.bumptech.glide:glide:4.0.0'
+    annotationProcessor 'com.github.bumptech.glide:compiler:4.0.0'
+    compile 'org.jsoup:jsoup:1.8.3'
+    testCompile 'junit:junit:4.12'
+    compile project(':blip')
+}

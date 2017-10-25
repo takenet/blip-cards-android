@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?>
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    package="ai.blip.cards">
+
+    <application>
+        <activity
+            android:name="ai.blip.cards.activities.VideoActivity"
+            android:theme="@style/AppTheme.NoActionBar"/>
+        <activity
+            android:name="ai.blip.cards.activities.ImageActivity"
+            android:theme="@style/AppTheme.NoActionBar"/>
+    </application>
+
+</manifest>
