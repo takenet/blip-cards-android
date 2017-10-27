@@ -1,0 +1,87 @@
+apply plugin: 'com.android.library'
+
+group = 'ai.blip.cards'
+version = '1.0'
+
+ext {
+    SUPPORT_LIBRARY_VERSION = '26.+'
+    LIME_VERSION = '1.1.27'
+
+    bintrayRepo = 'maven'
+    bintrayName = 'blip-cards-android'
+
+    publishedGroupId = 'ai.blip.cards'
+    libraryName = 'blip-cards-android'
+    artifact = 'blip-cards-android'
+
+    libraryDescription = 'Reusable BLiP cards for your Android app'
+
+    siteUrl = 'https://github.com/takenet/blip-cards-android'
+    gitUrl = 'https://github.com/takenet/blip-cards-android.git'
+
+    libraryVersion = '0.1.1'
+
+    developerId = 'jose-ramirez'
+    developerName = 'José Ramírez'
+    developerEmail = 'jose@take.net'
+
+    licenseName = 'MIT'
+    licenseUrl = 'https://opensource.org/licenses/MIT'
+    allLicenses = ["MIT"]
+}
+
+android {
+    compileSdkVersion 26
+    buildToolsVersion '26.0.2'
+    defaultConfig {
+        minSdkVersion 15
+        targetSdkVersion 26
+        versionCode 1
+        versionName "1.0"
+        testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
+    }
+    buildTypes {
+        release {
+            minifyEnabled false
+            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+        }
+    }
+    packagingOptions {
+        exclude 'META-INF/ASL2.0'
+        exclude 'META-INF/LICENSE'
+        exclude 'META-INF/NOTICE'
+    }
+    lintOptions {
+        abortOnError false
+    }
+}
+
+task wrapper(type: Wrapper) {
+    gradleVersion = '2.0' //version required
+}
+
+dependencies {
+    compile fileTree(dir: 'libs', include: ['*.jar'])
+    androidTestCompile('com.android.support.test.espresso:espresso-core:2.2.2', {
+        exclude group: 'com.android.support', module: 'support-annotations'
+    })
+
+    compile "com.android.support:recyclerview-v7:$SUPPORT_LIBRARY_VERSION"
+    compile "com.android.support:appcompat-v7:$SUPPORT_LIBRARY_VERSION"
+    compile "com.android.support:support-v4:$SUPPORT_LIBRARY_VERSION"
+    compile "com.android.support:design:$SUPPORT_LIBRARY_VERSION"
+
+    compile "org.limeprotocol:lime-java-core:$LIME_VERSION"
+    compile "org.limeprotocol:lime-java-messaging:$LIME_VERSION"
+
+    compile group: 'org.jsoup', name: 'jsoup', version: '1.8.3'
+
+    compile 'com.github.bumptech.glide:glide:4.0.0'
+    compile 'com.android.support.constraint:constraint-layout:1.0.2'
+    testCompile 'junit:junit:4.12'
+    annotationProcessor 'com.github.bumptech.glide:compiler:4.0.0'
+}
+
+apply from: 'https://raw.githubusercontent.com/nuuneoi/JCenter/master/installv1.gradle'
+apply from: 'https://raw.githubusercontent.com/nuuneoi/JCenter/master/bintrayv1.gradle'
+
