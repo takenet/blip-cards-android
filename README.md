@@ -1,248 +1,374 @@
 # Blip Cards for Android
 
-To install the dependency:
+## Installing the dependency
+
+In the app's `build.gradle` file:
+```
+dependencies{
+    ...
+    compile 'ai.blip.cards:blip-cards-android:<latest-version>'
+    ...
+}
 
 ```
-	compile 'ai.blip.cards:blip-cards-android:<latest-version>'
+
+In the project's `build.gradle` file:
+```
+allprojects {
+    repositories {
+        ...
+        maven { url 'https://dl.bintray.com/takenet/maven/' }
+        ...
+    }
+}
 ```
 
----------------
+# Components:
 
-# Using Examples:
+## ChatState
+### Example:
+Code:
+```
+    ChatState p = new ChatState();
 
-PS: All these examples accepts an extra/optional argument that sets the Order of the element. But if you want to use, you have to set for all the elements of the specific object.
+    Message m = new Message();
+    m.setContent(p);
 
-## 1. Sending Text
+    View v = new BlipCard(this)
+        .right()
+        .setMessage(m)
+        .build();
+```
 
-### Requirements:  
-Text: Obligatory
+Result:
 
-### Example:  
+ <img src="./docs/resources/images/chatstate.png" alt="Carousel" style="width: 400px;"/>
 
+---
+
+## Text
+### Example:
+Code:
+```
+    PlainText p = new PlainText("Clear up everything related to the proposal, SMS code, vehicle model, etc.");
+
+    Message m = new Message();
+    m.setContent(p);
+
+    View v = new BlipCard(this)
+        .right()
+        .setMessage(m)
+        .setFrom("Assistente Virtual")
+        .setMenuMultimediaClickListener(new MenuMultimedia.MenuMultimediaListener() {
+            @Override
+            public void onItemClick(DocumentSelectOption documentSelectOption, int i) {
+                Toast.makeText(getBaseContext(), "" + i, Toast.LENGTH_SHORT).show();
+            }
+        })
+        .setDateTime("15:15")
+        .build();
+```
+
+Result:
+
+<img src="./docs/resources/images/text.png" alt="Carousel" style="width: 400px;"/>
+
+---
+
+## Media (Audio)
+### Example:
 Code:  
-```C#
-	var document = BlipSDKHelper.CreateTextDocument("... Inspiração, e um pouco de café! E isso me basta!");
-	
-	await _sender.SendMessageAsync(document, message.From, cancellationToken);
+```
+    MediaLink p = new MediaLink();
+    p.setText("20 years ago, we of the band Skank were going inside the studio to make \"Garota Nacional\", music for our album \"O Samba Poconé\".");
+    p.setType(MediaType.parse("audio/mp3"));
+    p.setUri(URI.create("http://blaamandagjazzband.dk/jazz/mp3/basin_street_blues.mp3"));
+
+    Message m = new Message();
+    m.setContent(p);
+
+    View v = new BlipCard(this)
+        .left()
+        .setMessage(m)
+        .setFrom("Virtual Assistant")
+        .setDateTime("15:15")
+        .build();
 ```
 
-Result:  
+Result:
 
-![alt text](https://image.ibb.co/io6qJ6/Text.png)
+<img src="./docs/resources/images/media_audio.png" alt="Carousel" style="width: 400px;"/>
 
-## 2. Sending Image
+---
 
-### Requirements:  
-UrlImage: Obligatory  
-PreviewUrlImage: Obligatory  
-Title: Optional  
-Subtitle: Optional
+## Media (Video)
+### Example:
+Code:  
+```
+    MediaLink p = new MediaLink();
+    p.setType(MediaType.parse("video/mp4"));
+    p.setUri(URI.create("http://clips.vorwaerts-gmbh.de/VfE_html5.mp4"));
 
+    p.setPreviewType(MediaType.parse("image/jpeg"));
+    p.setPreviewUri(URI.create("https://encrypted-tbn3.gstatic.com/images?q=tbn:ANd9GcS8qkelB28RstsNxLi7gbrwCLsBVmobPjb5IrwKJSuqSnGX4IzX"));
+
+
+    Message m = new Message();
+    m.setContent(p);
+
+    View v = new BlipCard(this)
+        .left()
+        .setMessage(m)
+        .setFrom("Virtual Assistant")
+        .setDateTime("15:15")
+        .build();
+```
+
+Result:
+
+<img src="./docs/resources/images/media_video.png" alt="Carousel" style="width: 400px;"/>
+
+----
+
+## Media (Image)
 ### Example:
 
 Code:  
- ```C#
-	var document = BlipSDKHelper.CreateImageDocument("https://dl.dropboxusercontent.com/s/99sw7vu788suww1/imagineFloor.jpg", "https://dl.dropboxusercontent.com/s/0u34yn7pj29ak1v/imagineFloorPreview.jpg", "OptionalTitle", "OptionalSubtitle");
-	
-	await _sender.SendMessageAsync(document, message.From, cancellationToken);
+```
+    MediaLink p = new MediaLink();
+    p.setText("Here's a cat image for you!");
+    p.setType(MediaType.parse("image/jpeg"));
+    p.setUri(URI.create("http://2.bp.blogspot.com/-pATX0YgNSFs/VP-82AQKcuI/AAAAAAAALSU/Vet9e7Qsjjw/s1600/Cat-hd-wallpapers.jpg"));
+    p.setPreviewType(MediaType.parse("image/jpeg"));
+    p.setPreviewUri(URI.create("https://encrypted-tbn3.gstatic.com/images?q=tbn:ANd9GcS8qkelB28RstsNxLi7gbrwCLsBVmobPjb5IrwKJSuqSnGX4IzX"));
+
+    Message m = new Message();
+    m.setContent(p);
+
+    View v = new BlipCard(this)
+        .left()
+        .setMessage(m)
+        .setFrom("Virtual Assistant")
+        .setDateTime("15:15")
+        .build();
 ```
 
 Result:  
-![alt text](https://image.ibb.co/hRUXWR/Image.png)
 
-## 3. Sending Video
+<img src="./docs/resources/images/media_image.png" alt="Carousel" style="width: 400px;"/>
 
-### Requirements:  
-UrlVideo: Obligatory  
-Title: Optional  
-Subtitle: Optional
+---
 
+## Media (Document)
+### Example:
+Code:  
+```
+    MediaLink p = new MediaLink();
+    p.setSize(new Long(3124123));
+    p.setText("Document PDF");
+    p.setType(MediaType.parse("application/pdf"));
+    p.setUri(URI.create("https://s3-sa-east-1.amazonaws.com/i.imgtake.takenet.com.br/d6ztq/d6ztq.pdf"));
+
+    Message m = new Message();
+    m.setContent(p);
+
+    View v = new BlipCard(this)
+        .left()
+        .setMessage(m)
+        .setFrom("Virtual Assistant")
+        .setDateTime("15:15")
+        .build();
+```
+
+Result:
+  
+<img src="./docs/resources/images/media_document.png" alt="Carousel" style="width: 400px;"/>
+
+---
+
+## Location
 ### Example:
 
 Code:  
- ```C#
-	var document = BlipSDKHelper.CreateVideoDocument("https://dl.dropboxusercontent.com/s/jxy3sspxbl6ilan/John%20Lennon%20-%20Imagine.mp4", "OptionalTitle", "OptionalSubtitle");
-	
-	await _sender.SendMessageAsync(document, message.From, cancellationToken);
+```
+    Location p = new Location();
+    p.setText("Take's place");
+    p.setLatitude(-19.918899);
+    p.setLongitude(-43.959275);
+
+    Message m = new Message();
+    m.setContent(p);
+
+    View v = new BlipCard(this)
+        .left()
+        .setMessage(m)
+        .setFrom("Virtual Assistant")
+        .setLocationClickListener(new ai.blip.cards.controls.Location.LocationListener() {
+            @Override
+            public void onLocationClick(Location l) {
+                Toast.makeText(getBaseContext(), "LocationClick " + l.getLatitude() + "," + l.getLongitude(), Toast.LENGTH_SHORT).show();
+            }
+        })
+        .setDateTime("15:15")
+        .build();
 ```
 
-Result:  
-![alt text](https://image.ibb.co/bvNxy6/Video.png)
+Result:
 
+<img src="./docs/resources/images/location.png" alt="Carousel" style="width: 400px;"/>
 
-## 4. Sending Weblink(Image with link)
+---
 
-### Requirements:  
-UrlImage: Obligatory  
-Url: Obligatory  
-Title: Optional  
-Subtitle: Optional
+## Web Link
+### Example:
+Code:
+```
+    WebLink p = new WebLink();
+    p.setText("text");
+    p.setTitle("title");
+    p.setUri(URI.create("http://www.uol.com.br"));
 
+    Message m = new Message();
+    m.setContent(p);
+
+    View v = new BlipCard(this)
+        .right()
+        .setMessage(m)
+        .setFrom("Virtual Assistant")
+        .setMenuMultimediaClickListener(new MenuMultimedia.MenuMultimediaListener() {
+            @Override
+            public void onItemClick(DocumentSelectOption documentSelectOption, int i) {
+                Toast.makeText(getBaseContext(), "" + i, Toast.LENGTH_SHORT).show();
+            }
+        })
+        .setDateTime("15:15")
+        .build();
+```
+
+Result:
+
+<img src="./docs/resources/images/weblink.png" alt="Carousel" style="width: 400px;"/>
+
+---
+
+## Multimedia Menu
 ### Example:
 
 Code:  
- ```C#
-	var document = BlipSDKHelper.CreateImageWithLinkDocument("https://dl.dropboxusercontent.com/s/99sw7vu788suww1/imagineFloor.jpg", "https://dl.dropboxusercontent.com/s/0u34yn7pj29ak1v/imagineFloorPreview.jpg", "OptionalTitle","OptionalSubtitle");
-	
-	await _sender.SendMessageAsync(document, message.From, cancellationToken);
+```
+    Message m = new Message();
+    m.setContent(createSelect("Filling out proposal form",
+    "Clear up everything realted to the proposal, SMS code, vehicle model, etc.",
+    "http://files.lojas.club/blip.png"));
+
+    View v = new BlipCard(this)
+        .right()
+        .setMessage(m)
+        .setFrom("Assistente Virtual")
+        .setMenuMultimediaClickListener(new MenuMultimedia.MenuMultimediaListener() {
+            @Override
+            public void onItemClick(DocumentSelectOption documentSelectOption, int i) {
+                Toast.makeText(getBaseContext(), "" + i, Toast.LENGTH_SHORT).show();
+            }
+        })
+        .setDateTime("15:15")
+        .build();
 ```
 
-Result:  
-![alt text](https://image.ibb.co/fyG1Qm/Image_With_Link.png)`
+Result:
 
-## 5. Sending Menu
+<img src="./docs/resources/images/multimedia_menu.png" alt="Carousel" style="width: 400px;"/>
 
-### Requirements:  
-Text: Obligatory  
-\#Min Buttons: 1  
-\#Max Buttons: unlimited  
-PS: Buttons are grouped by 3 when sent.
+---
 
+## Carousel
 ### Example:
-
 Code:  
- ```C#
-	var menu = new MenuModel("Escolha uma opção:");
-	menu.AddDefaultButton("Botão1", "Value1");
-	menu.AddDefaultButton("Botão2", "Value2");
-	menu.AddDefaultButton("Botão3", "Value3");
-	var document = BlipSDKHelper.CreateMenuDocument(menu);
-	
-	await _sender.SendMessageAsync(document, message.From, cancellationToken);
+```
+    Message m = new Message();
+
+    DocumentCollection docCol = new DocumentCollection();
+
+    Document[] docs = new Document[3];
+    docs[0] = createSelect(
+        "Filling out proposal form 1",
+        "Clear up everything realted to the proposal, SMS code, vehicle model, etc.",
+        "http://files.lojas.club/blip.png");
+    docs[1] = createSelect(
+        "Filling out proposal form 2",
+        "Clear up everything realted to the proposal, SMS code, vehicle model, etc.",
+        "http://files.lojas.club/blip.png");
+    docs[2] = createSelect(
+        "Filling out proposal form 3",
+        "Clear up everything realted to the proposal, SMS code, vehicle model, etc.",
+        "http://files.lojas.club/blip.png");
+
+    docCol.setItems(docs);
+
+    m.setContent(docCol);
+
+    View v = new BlipCard(this)
+        .right()
+        .setMessage(m)
+        .setFrom(getString(R.string.virtual_assistant))
+        .setCaroulselClickListener(new Carousel.CarouselListener() {
+            @Override
+            public void onItemClick(int i, DocumentSelectOption documentSelectOption, int i1) {
+                Toast.makeText(getBaseContext(), "Menu: " + i + " option: " + i1, Toast.LENGTH_SHORT).show();
+            }
+        })
+
+        .setFrom("Select one from the items below:")
+        .setDateTime("15:15")
+        .build();
 ```
 
-Result:  
-![alt text](https://image.ibb.co/eWLHy6/Menu.png)`
+Result:
 
+<img src="./docs/resources/images/carousel.png" alt="Carousel" style="width: 400px;"/>
 
-## 6. Sending QuickReply
+---
 
-### Requirements:  
-Text: Obligatory  
-\#Min Buttons: 1  
-\#Max Buttons: 11
-
+## Quick Reply
 ### Example:
+Code:
+```
+    Select p = new Select();
+    p.setText("Text");
 
-Code:  
- ```C#
-	var quickreply = new QuickReplyModel("Escolha uma opção:");
-	quickreply.AddDefaultButton("Botão1", "Value1");
-	quickreply.AddDefaultButton("Botão2", "Value2");
-	quickreply.AddDefaultButton("Botão3", "Value3");
-	quickreply.AddDefaultButton("Botão4", "Value4");
-	quickreply.AddDefaultButton("Botão5", "Value5");
-	quickreply.AddDefaultButton("Botão6", "Value6");
-	quickreply.AddDefaultButton("Botão7", "Value7");
-	quickreply.AddDefaultButton("Botão8", "Value8");
-	quickreply.AddDefaultButton("Botão9", "Value9");
-	quickreply.AddDefaultButton("Botão10", "Value10");
-	quickreply.AddLocationButton();
-	var document = BlipSDKHelperLibrary.BlipSDKHelper.CreateQuickReplyDocument(quickreply);
-	
-	await _sender.SendMessageAsync(document, message.From, cancellationToken);
+    SelectOption[] options = new SelectOption[4];
+    SelectOption op1 = new SelectOption();
+    op1.setText("Option 1");
+    options[0] = op1;
+    SelectOption op2 = new SelectOption();
+    op2.setText("Option 2");
+    options[1] = op2;
+    SelectOption op3 = new SelectOption();
+    op3.setText("Option 3");
+    options[2] = op3;
+    SelectOption op4 = new SelectOption();
+    op4.setText("Option 4");
+    options[3] = op4;
+
+    p.setOptions(options);
+
+    Message m = new Message();
+    m.setContent(p);
+
+    View v = new BlipCard(this)
+        .left()
+        .setMessage(m)
+        .setFrom("Assistente Virtual")
+        .setQuickReplyListener(new QuickReply.QuickReplyListener() {
+            @Override
+            public void onItemClick(SelectOption selectOption, int i) {
+                Toast.makeText(getBaseContext(), "" + selectOption.getText(), Toast.LENGTH_SHORT).show();
+            }
+        })
+        .setDateTime("15:15")
+        .build();
 ```
 
-Result:  
-![alt text](https://image.ibb.co/ksbwrR/Quick_Reply.gif)
+Result:
 
-## 7. Sending Carousel
-
-### Requirements:  
-
-\#Min Buttons per Card: 0  
-\#Max Buttons per Card: 3  
-\#Min Cards: 1  
-\#Max Cards: 10
-
-### Example:
-
-Code:  
- ```C#
-	var carousel = new CarouselModel();
-	carousel.AddCard("Title, Subtitle, Image and Buttons", "Image goes up above, Title goes above, Subtitle goes here and button goes below.", "http://www.w3schools.com/css/img_fjords.jpg");
-    carousel.GetCard(0).AddDefaultButton("First button: Text", "Value of FirstButton");
-    carousel.GetCard(0).AddLinkButton("Second button: Link", "http://www.w3schools.com/css/img_fjords.jpg");
-    carousel.GetCard(0).AddShareButton();
-
-    carousel.AddCard("Title, Subtitle and Button", "Title goes above, Subtitle goes here and button goes below.", null);
-    carousel.GetCard(1).AddDefaultButton("Another button: Text", "Some other value of FirstButton");
-
-    carousel.AddCard("Title, Subtitle and Image", "Image goes up above, Title goes above and Subtitle goes here.", "http://www.w3schools.com/css/img_fjords.jpg");
-
-    carousel.AddCard("Title, Image and Button: Image goes up above, Title goes here and button below", null, "http://www.w3schools.com/css/img_fjords.jpg");
-    carousel.GetCard(3).AddDefaultButton("Text Button", "Value goes here");
-
-    carousel.AddCard("Title and Image: Image goes up above, Title goes here",  null, "http://www.w3schools.com/css/img_fjords.jpg");
-
-    carousel.AddCard("Title and Subtitle", "Title goes above, Subtitle goes here", null);
-
-    carousel.AddCard("Title and Button: Title goes here, button goes below", null, null);
-    carousel.GetCard(6).AddLinkButton("Redirect to link", "http://www.w3schools.com/css/img_fjords.jpg");
-    carousel.GetCard(6).AddLinkButton("Redirect to link", "http://www.facebook.com");
-
-    var document = BlipSDKHelper.CreateCarouselDocument(carousel);
-
-    await _sender.SendMessageAsync(document, message.From, cancellationToken);
-```
-
-Result:  
-![alt text](https://image.ibb.co/bxOsWR/Carousel_Smaller6.gif)
-
-
-## 8. Sending List
-
-### Requirements:  
-
-\#Min Items: 2  
-\#Max Items: 4  
-Title of each Item: Optional  
-Subtitle of each Item: Optional
-
-### Example:
-
-Code:  
- ```C#
-	var listModel = new ListModel();
-	
-	listModel.AddItem("Titulo0", "Subtitulo0", "http://www.jqueryscript.net/images/Simplest-Responsive-jQuery-Image-Lightbox-Plugin-simple-lightbox.jpg", "http://www.jqueryscript.net/images/Simplest-Responsive-jQuery-Image-Lightbox-Plugin-simple-lightbox.jpg");
-	listModel.AddItem("Titulo1", "Subtitulo1", "http://www.jqueryscript.net/images/Simplest-Responsive-jQuery-Image-Lightbox-Plugin-simple-lightbox.jpg", "http://www.jqueryscript.net/images/Simplest-Responsive-jQuery-Image-Lightbox-Plugin-simple-lightbox.jpg");
-	listModel.AddItem("Titulo2", "Subtitulo2", "http://www.jqueryscript.net/images/Simplest-Responsive-jQuery-Image-Lightbox-Plugin-simple-lightbox.jpg", "http://www.jqueryscript.net/images/Simplest-Responsive-jQuery-Image-Lightbox-Plugin-simple-lightbox.jpg");
-	listModel.AddItem("Titulo3", "Subtitulo3", "http://www.jqueryscript.net/images/Simplest-Responsive-jQuery-Image-Lightbox-Plugin-simple-lightbox.jpg", "http://www.jqueryscript.net/images/Simplest-Responsive-jQuery-Image-Lightbox-Plugin-simple-lightbox.jpg");
-	
-	var document = BlipSDKHelperLibrary.BlipSDKHelper.CreateListDocument(listModel);
-	
-	await _sender.SendMessageAsync(document, message.From, cancellationToken);
-```
-
-Result:  
-![alt text](https://image.ibb.co/k5fHy6/List.png)
-
-
-## 9. Sending Multiple Documents at the same time
-
-### Requirements:  
-
-It follows the dependency of each document that will be sent.
-
-### Example:
-
-Code:  
- ```C#
-	var document1 = BlipSDKHelper.CreateTextDocument("... Inspiração, e um pouco de café! E isso me basta!");
-	
-	var document2 = BlipSDKHelper.CreateImageDocument("https://dl.dropboxusercontent.com/s/99sw7vu788suww1/imagineFloor.jpg", "https://dl.dropboxusercontent.com/s/0u34yn7pj29ak1v/imagineFloorPreview.jpg", "OptionalTitle", "OptionalSubtitle");
-	
-	var groupDocs = BlipSDKHelper.CreateCollectionOfDocuments(document1, document2);
-	
-	//Or
-	//var group = new GroupDocumentsModel();
-	//group.Add(document1);
-	//group.Add(document2);
-	//var groupDocs = BlipSDKHelperLibrary.BlipSDKHelper.CreateCollectionOfDocuments(group);
-	
-	await _sender.SendMessageAsync(groupDocs , message.From, cancellationToken);
-```
-
-Result:  
-![alt text](https://image.ibb.co/gjs85m/Multiple_Docs.png)
+<img src="./docs/resources/images/quick_reply.png" alt="Carousel" style="width: 400px;"/>

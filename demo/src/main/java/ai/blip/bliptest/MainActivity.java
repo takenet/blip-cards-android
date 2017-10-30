@@ -53,37 +53,37 @@ public class MainActivity extends AppCompatActivity {
         Message m = new Message();
 
         DocumentSelectOption option1 = new DocumentSelectOption();
-        option1.setLabel(new DocumentContainer(new PlainText("Menu Multimedia")));
+        option1.setLabel(new DocumentContainer(new PlainText(getString(R.string.multimedia_menu_label))));
         option1.setOrder(1);
         DocumentSelectOption option2 = new DocumentSelectOption();
-        option2.setLabel(new DocumentContainer(new PlainText("Carousel")));
+        option2.setLabel(new DocumentContainer(new PlainText(getString(R.string.carousel_label))));
         option2.setOrder(2);
         DocumentSelectOption option3 = new DocumentSelectOption();
-        option3.setLabel(new DocumentContainer(new PlainText("Text")));
+        option3.setLabel(new DocumentContainer(new PlainText(getString(R.string.text_label))));
         option3.setOrder(3);
         DocumentSelectOption option4 = new DocumentSelectOption();
-        option4.setLabel(new DocumentContainer(new PlainText("Web Link")));
+        option4.setLabel(new DocumentContainer(new PlainText(getString(R.string.weblink_label))));
         option4.setOrder(4);
         DocumentSelectOption option5 = new DocumentSelectOption();
-        option5.setLabel(new DocumentContainer(new PlainText("Quick Reply")));
+        option5.setLabel(new DocumentContainer(new PlainText(getString(R.string.quick_reply_label))));
         option5.setOrder(5);
         DocumentSelectOption option6 = new DocumentSelectOption();
-        option6.setLabel(new DocumentContainer(new PlainText("Chat State")));
+        option6.setLabel(new DocumentContainer(new PlainText(getString(R.string.chatstate_label))));
         option6.setOrder(6);
         DocumentSelectOption option7 = new DocumentSelectOption();
-        option7.setLabel(new DocumentContainer(new PlainText("Location")));
+        option7.setLabel(new DocumentContainer(new PlainText(getString(R.string.location_label))));
         option7.setOrder(7);
         DocumentSelectOption option8 = new DocumentSelectOption();
-        option8.setLabel(new DocumentContainer(new PlainText("Media Audio")));
+        option8.setLabel(new DocumentContainer(new PlainText(getString(R.string.media_audio_label))));
         option8.setOrder(8);
         DocumentSelectOption option9 = new DocumentSelectOption();
-        option9.setLabel(new DocumentContainer(new PlainText("Media Video")));
+        option9.setLabel(new DocumentContainer(new PlainText(getString(R.string.media_video_label))));
         option9.setOrder(9);
         DocumentSelectOption option10 = new DocumentSelectOption();
-        option10.setLabel(new DocumentContainer(new PlainText("Media Image")));
+        option10.setLabel(new DocumentContainer(new PlainText(getString(R.string.media_image_label))));
         option10.setOrder(10);
         DocumentSelectOption option11 = new DocumentSelectOption();
-        option11.setLabel(new DocumentContainer(new PlainText("Media Document")));
+        option11.setLabel(new DocumentContainer(new PlainText(getString(R.string.media_document_label))));
         option11.setOrder(11);
 
         DocumentSelectOption[] options = new DocumentSelectOption[11];
@@ -112,7 +112,7 @@ public class MainActivity extends AppCompatActivity {
                     @Override
                     public void onItemClick(DocumentSelectOption documentSelectOption, int i) {
                         if (i == 0) {
-                            menuMultiMidiaClick();
+                            menuMultiMediaClick();
                         } else if (i == 1) {
                             carouselClick();
                         } else if (i == 2) {
@@ -146,7 +146,7 @@ public class MainActivity extends AppCompatActivity {
     public void documentClick() {
         MediaLink p = new MediaLink();
         p.setSize(new Long(3124123));
-        p.setText("Document PDF");
+        p.setText(getString(R.string.pdf_content_text));
         p.setType(MediaType.parse("application/pdf"));
         p.setUri(URI.create("https://s3-sa-east-1.amazonaws.com/i.imgtake.takenet.com.br/d6ztq/d6ztq.pdf"));
 
@@ -156,8 +156,8 @@ public class MainActivity extends AppCompatActivity {
         View v = new BlipCard(this)
                 .left()
                 .setMessage(m)
-                .setFrom("Virtual Assistant")
-                .setDateTime("15:15")
+                .setFrom(getString(R.string.virtual_assistant))
+                .setDateTime(getString(R.string.time_of_day))
                 .build();
 
         content.addView(v);
@@ -167,7 +167,7 @@ public class MainActivity extends AppCompatActivity {
 
     public void imageClick() {
         MediaLink p = new MediaLink();
-        p.setText("Here is a cat image for you!");
+        p.setText(getString(R.string.image_text));
         p.setType(MediaType.parse("image/jpeg"));
         p.setUri(URI.create("http://2.bp.blogspot.com/-pATX0YgNSFs/VP-82AQKcuI/AAAAAAAALSU/Vet9e7Qsjjw/s1600/Cat-hd-wallpapers.jpg"));
         p.setPreviewType(MediaType.parse("image/jpeg"));
@@ -179,8 +179,8 @@ public class MainActivity extends AppCompatActivity {
         View v = new BlipCard(this)
                 .left()
                 .setMessage(m)
-                .setFrom("Virtual Assistant")
-                .setDateTime("15:15")
+                .setFrom(getString(R.string.virtual_assistant))
+                .setDateTime(getString(R.string.time_of_day))
                 .build();
 
         content.addView(v);
@@ -190,9 +190,7 @@ public class MainActivity extends AppCompatActivity {
 
     public void videoClick() {
         MediaLink p = new MediaLink();
-//        p.setText("Há 20 anos, nós do Skank, entrávamos em estúdio pra gravar \"Garota Nacional\", música do álbum O Samba Poconé.");
         p.setType(MediaType.parse("video/mp4"));
-//        p.setUri(URI.create("http://www.onirikal.com/videos/mp4/nestlegold.mp4"));
         p.setUri(URI.create("http://clips.vorwaerts-gmbh.de/VfE_html5.mp4"));
 
         p.setPreviewType(MediaType.parse("image/jpeg"));
@@ -205,8 +203,8 @@ public class MainActivity extends AppCompatActivity {
         View v = new BlipCard(this)
                 .left()
                 .setMessage(m)
-                .setFrom("Assistente Virtual")
-                .setDateTime("15:15")
+                .setFrom(getString(R.string.virtual_assistant))
+                .setDateTime(getString(R.string.time_of_day))
                 .build();
 
         content.addView(v);
@@ -216,7 +214,7 @@ public class MainActivity extends AppCompatActivity {
 
     public void audioClick() {
         MediaLink p = new MediaLink();
-        p.setText("Há 20 anos, nós do Skank, entrávamos em estúdio pra gravar \"Garota Nacional\", música do álbum O Samba Poconé.");
+        p.setText(getString(R.string.skank_story));
         p.setType(MediaType.parse("audio/mp3"));
         p.setUri(URI.create("http://blaamandagjazzband.dk/jazz/mp3/basin_street_blues.mp3"));
 
@@ -226,8 +224,8 @@ public class MainActivity extends AppCompatActivity {
         View v = new BlipCard(this)
                 .left()
                 .setMessage(m)
-                .setFrom("Assistente Virtual")
-                .setDateTime("15:15")
+                .setFrom(getString(R.string.virtual_assistant))
+                .setDateTime(getString(R.string.time_of_day))
                 .build();
 
         content.addView(v);
@@ -248,14 +246,14 @@ public class MainActivity extends AppCompatActivity {
         View v = new BlipCard(this)
                 .left()
                 .setMessage(m)
-                .setFrom("Assistente Virtual")
+                .setFrom(getString(R.string.virtual_assistant))
                 .setLocationClickListener(new ai.blip.cards.controls.Location.LocationListener() {
                     @Override
                     public void onLocationClick(Location l) {
                         Toast.makeText(getBaseContext(), "LocationClick " + l.getLatitude() + "," + l.getLongitude(), Toast.LENGTH_SHORT).show();
                     }
                 })
-                .setDateTime("15:15")
+                .setDateTime(getString(R.string.time_of_day))
                 .build();
 
         content.addView(v);
@@ -285,16 +283,16 @@ public class MainActivity extends AppCompatActivity {
 
         SelectOption[] options = new SelectOption[4];
         SelectOption op1 = new SelectOption();
-        op1.setText("Opção 1");
+        op1.setText(getString(R.string.option_1));
         options[0] = op1;
         SelectOption op2 = new SelectOption();
-        op2.setText("Opção 2");
+        op2.setText(getString(R.string.option_2));
         options[1] = op2;
         SelectOption op3 = new SelectOption();
-        op3.setText("Opção 3");
+        op3.setText(getString(R.string.option_3));
         options[2] = op3;
         SelectOption op4 = new SelectOption();
-        op4.setText("Opção 4");
+        op4.setText(getString(R.string.option_4));
         options[3] = op4;
 
         p.setOptions(options);
@@ -305,14 +303,14 @@ public class MainActivity extends AppCompatActivity {
         View v = new BlipCard(this)
                 .left()
                 .setMessage(m)
-                .setFrom("Assistente Virtual")
+                .setFrom(getString(R.string.virtual_assistant))
                 .setQuickReplyListener(new QuickReply.QuickReplyListener() {
                     @Override
                     public void onItemClick(SelectOption selectOption, int i) {
                         Toast.makeText(getBaseContext(), "" + selectOption.getText(), Toast.LENGTH_SHORT).show();
                     }
                 })
-                .setDateTime("15:15")
+                .setDateTime(getString(R.string.time_of_day))
                 .build();
 
         content.addView(v);
@@ -344,9 +342,9 @@ public class MainActivity extends AppCompatActivity {
     public void webLinkClick() {
 
         WebLink p = new WebLink();
-        p.setText("text");
-        p.setTitle("titulo");
-        p.setUri(URI.create("http://www.uol.com.br"));
+        p.setText(getString(R.string.link_text));
+        p.setTitle(getString(R.string.link_title));
+        p.setUri(URI.create(getString(R.string.url_text)));
 
         Message m = new Message();
         m.setContent(p);
@@ -354,14 +352,14 @@ public class MainActivity extends AppCompatActivity {
         View v = new BlipCard(this)
                 .right()
                 .setMessage(m)
-                .setFrom("Assistente Virtual")
+                .setFrom(getString(R.string.virtual_assistant))
                 .setMenuMultimediaClickListener(new MenuMultimedia.MenuMultimediaListener() {
                     @Override
                     public void onItemClick(DocumentSelectOption documentSelectOption, int i) {
                         Toast.makeText(getBaseContext(), "" + i, Toast.LENGTH_SHORT).show();
                     }
                 })
-                .setDateTime("15:15")
+                .setDateTime(getString(R.string.time_of_day))
                 .build();
 
         content.addView(v);
@@ -371,7 +369,7 @@ public class MainActivity extends AppCompatActivity {
 
     public void textClick() {
 
-        PlainText p = new PlainText("Tire dúvidas sobre, proposta, código SMS, modelo de veículo, entre outros");
+        PlainText p = new PlainText(getString(R.string.clear_everything_up));
 
         Message m = new Message();
         m.setContent(p);
@@ -379,14 +377,14 @@ public class MainActivity extends AppCompatActivity {
         View v = new BlipCard(this)
                 .right()
                 .setMessage(m)
-                .setFrom("Assistente Virtual")
+                .setFrom(getString(R.string.virtual_assistant))
                 .setMenuMultimediaClickListener(new MenuMultimedia.MenuMultimediaListener() {
                     @Override
                     public void onItemClick(DocumentSelectOption documentSelectOption, int i) {
                         Toast.makeText(getBaseContext(), "" + i, Toast.LENGTH_SHORT).show();
                     }
                 })
-                .setDateTime("15:15")
+                .setDateTime(getString(R.string.time_of_day))
                 .build();
 
         content.addView(v);
@@ -394,22 +392,26 @@ public class MainActivity extends AppCompatActivity {
         sendToDown();
     }
 
-    public void menuMultiMidiaClick() {
+    public void menuMultiMediaClick() {
 
         Message m = new Message();
-        m.setContent(criaSelect("Preench. de Proposta", "Tire dúvidas sobre, proposta, código SMS, modelo de veículo, entre outros", "http://files.lojas.club/blip.png"));
+
+        m.setContent(createSelect(
+                getString(R.string.fill_out_proposal_1),
+                getString(R.string.clear_everything_up),
+                getString(R.string.image_url)));
 
         View v = new BlipCard(this)
                 .right()
                 .setMessage(m)
-                .setFrom("Assistente Virtual")
+                .setFrom(getString(R.string.virtual_assistant))
                 .setMenuMultimediaClickListener(new MenuMultimedia.MenuMultimediaListener() {
                     @Override
                     public void onItemClick(DocumentSelectOption documentSelectOption, int i) {
                         Toast.makeText(getBaseContext(), "" + i, Toast.LENGTH_SHORT).show();
                     }
                 })
-                .setDateTime("15:15")
+                .setDateTime(getString(R.string.time_of_day))
                 .build();
 
         content.addView(v);
@@ -418,28 +420,24 @@ public class MainActivity extends AppCompatActivity {
 
     }
 
-    private DocumentSelect criaSelect(String titulo, String texto, String imagem) {
+    private DocumentSelect createSelect(String title, String text, String imageUri) {
         DocumentSelectOption option1 = new DocumentSelectOption();
-        option1.setLabel(new DocumentContainer(new PlainText("Opção 1")));
+        option1.setLabel(new DocumentContainer(new PlainText(getString(R.string.option_1))));
         option1.setOrder(1);
         DocumentSelectOption option2 = new DocumentSelectOption();
-        option2.setLabel(new DocumentContainer(new PlainText("Opção 2")));
+        option2.setLabel(new DocumentContainer(new PlainText(getString(R.string.option_2))));
         option2.setOrder(2);
         DocumentSelectOption[] options = new DocumentSelectOption[2];
         options[0] = option1;
         options[1] = option2;
 
         DocumentSelect select = new DocumentSelect();
-        select.setHeader(new DocumentContainer(new PlainText("Choose your lunch")));
+        select.setHeader(new DocumentContainer(new PlainText(getString(R.string.choose_lunch_msg))));
         select.setOptions(options);
-
-        String uri = imagem;
-        String title = titulo;
-        String text = texto;
 
         MediaLink link = new MediaLink();
         try {
-            link.setUri(new URI(uri));
+            link.setUri(new URI(imageUri));
         } catch (Exception e) {
             Log.e("xxx", e.getMessage());
 
@@ -462,9 +460,9 @@ public class MainActivity extends AppCompatActivity {
         DocumentCollection docCol = new DocumentCollection();
 
         Document[] docs = new Document[3];
-        docs[0] = criaSelect("Preench. de Proposta 1", "Tire dúvidas sobre, proposta, código SMS, modelo de veículo, entre outros", "http://files.lojas.club/blip.png");
-        docs[1] = criaSelect("Preench. de Proposta 2", "Tire dúvidas sobre, proposta, código SMS, modelo de veículo, entre outros", "http://files.lojas.club/blip2.png");
-        docs[2] = criaSelect("Preench. de Proposta 1", "Tire dúvidas sobre, proposta, código SMS, modelo de veículo, entre outros", "http://files.lojas.club/blip.png");
+        docs[0] = createSelect(getString(R.string.fill_out_proposal_1), getString(R.string.clear_everything_up), getString(R.string.image_url));
+        docs[1] = createSelect(getString(R.string.fill_out_proposal_2), getString(R.string.clear_everything_up), getString(R.string.image_url));
+        docs[2] = createSelect(getString(R.string.fill_out_proposal_1), getString(R.string.clear_everything_up), getString(R.string.image_url));
 
         docCol.setItems(docs);
 
@@ -473,15 +471,16 @@ public class MainActivity extends AppCompatActivity {
         View v = new BlipCard(this)
                 .right()
                 .setMessage(m)
-                .setFrom("Assistente Virtual")
+                .setFrom(getString(R.string.virtual_assistant))
                 .setCaroulselClickListener(new Carousel.CarouselListener() {
                     @Override
                     public void onItemClick(int i, DocumentSelectOption documentSelectOption, int i1) {
-                        Toast.makeText(getBaseContext(), "Menu: " + i + " opção: " + i1, Toast.LENGTH_SHORT).show();
+                        Toast.makeText(getBaseContext(), "Menu: " + i + " option: " + i1, Toast.LENGTH_SHORT).show();
                     }
                 })
-                .setFrom("Selecione um dos itens abaixo")
-                .setDateTime("15:15")
+
+                .setFrom(getString(R.string.select_msg))
+                .setDateTime(getString(R.string.time_of_day))
                 .build();
 
         content.addView(v);

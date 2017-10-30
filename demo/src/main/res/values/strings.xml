@@ -1,3 +1,32 @@
 <resources>
     <string name="app_name">BlipTest</string>
+    <string name="fill_out_proposal_1">Filling out proposal form 1</string>
+    <string name="fill_out_proposal_2">Filling out proposal form 2</string>
+    <string name="clear_everything_up">Clear up everything related to the proposal, SMS code, vehicle model, etc.</string>
+    <string name="image_url">http://files.lojas.club/blip.png</string>
+    <string name="virtual_assistant">Virtual Assistant</string>
+    <string name="time_of_day">15:15</string>
+    <string name="option_1">Option 1</string>
+    <string name="option_2">Option 2</string>
+    <string name="option_3">Option 3</string>
+    <string name="option_4">Option 4</string>
+    <string name="choose_lunch_msg">Choose your lunch</string>
+    <string name="select_msg">Select one from the items below</string>
+    <string name="skank_story">20 years ago, we of the band Skank were going inside the studio to make \"Garota Nacional\", music for our album \"O Samba Poconé\".</string>
+    <string name="url_text">http://www.uol.com.br</string>
+    <string name="link_text">Text</string>
+    <string name="link_title">Title</string>
+    <string name="image_text">Here is a cat image for you!</string>
+    <string name="pdf_content_text">PDF Document</string>
+    <string name="multimedia_menu_label">Menu Multimedia</string>
+    <string name="carousel_label">Carousel</string>
+    <string name="text_label">Text</string>
+    <string name="weblink_label">Web Link</string>
+    <string name="quick_reply_label">Quick Reply</string>
+    <string name="chatstate_label">Chat State</string>
+    <string name="location_label">Location</string>
+    <string name="media_audio_label">Media (Audio)</string>
+    <string name="media_video_label">Media (Video)</string>
+    <string name="media_image_label">Media (Image)</string>
+    <string name="media_document_label">Media (Document)</string>
 </resources>

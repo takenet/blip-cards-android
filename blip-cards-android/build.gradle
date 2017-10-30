@@ -1,4 +1,6 @@
 apply plugin: 'com.android.library'
+apply plugin: 'com.github.dcendents.android-maven'
+apply plugin: 'com.jfrog.bintray'
 
 group = 'ai.blip.cards'
 version = '1.0'
@@ -19,7 +21,7 @@ ext {
     siteUrl = 'https://github.com/takenet/blip-cards-android'
     gitUrl = 'https://github.com/takenet/blip-cards-android.git'
 
-    libraryVersion = '0.1.1'
+    libraryVersion = '0.1.0'
 
     developerId = 'jose-ramirez'
     developerName = 'José Ramírez'
@@ -57,31 +59,30 @@ android {
 }
 
 task wrapper(type: Wrapper) {
-    gradleVersion = '2.0' //version required
+    gradleVersion = '2.4' //version required
 }
 
 dependencies {
-    compile fileTree(dir: 'libs', include: ['*.jar'])
-    androidTestCompile('com.android.support.test.espresso:espresso-core:2.2.2', {
+    implementation fileTree(dir: 'libs', include: ['*.jar'])
+    androidTestImplementation('com.android.support.test.espresso:espresso-core:2.2.2', {
         exclude group: 'com.android.support', module: 'support-annotations'
     })
 
-    compile "com.android.support:recyclerview-v7:$SUPPORT_LIBRARY_VERSION"
-    compile "com.android.support:appcompat-v7:$SUPPORT_LIBRARY_VERSION"
-    compile "com.android.support:support-v4:$SUPPORT_LIBRARY_VERSION"
-    compile "com.android.support:design:$SUPPORT_LIBRARY_VERSION"
+    implementation "com.android.support:recyclerview-v7:$SUPPORT_LIBRARY_VERSION"
+    implementation "com.android.support:appcompat-v7:$SUPPORT_LIBRARY_VERSION"
+    implementation "com.android.support:support-v4:$SUPPORT_LIBRARY_VERSION"
+    implementation "com.android.support:design:$SUPPORT_LIBRARY_VERSION"
 
-    compile "org.limeprotocol:lime-java-core:$LIME_VERSION"
-    compile "org.limeprotocol:lime-java-messaging:$LIME_VERSION"
+    implementation "org.limeprotocol:lime-java-core:$LIME_VERSION"
+    implementation "org.limeprotocol:lime-java-messaging:$LIME_VERSION"
 
-    compile group: 'org.jsoup', name: 'jsoup', version: '1.8.3'
+    implementation group: 'org.jsoup', name: 'jsoup', version: '1.8.3'
 
-    compile 'com.github.bumptech.glide:glide:4.0.0'
-    compile 'com.android.support.constraint:constraint-layout:1.0.2'
-    testCompile 'junit:junit:4.12'
+    implementation 'com.github.bumptech.glide:glide:4.0.0'
+    implementation 'com.android.support.constraint:constraint-layout:1.0.2'
+    testImplementation 'junit:junit:4.12'
     annotationProcessor 'com.github.bumptech.glide:compiler:4.0.0'
 }
 
 apply from: 'https://raw.githubusercontent.com/nuuneoi/JCenter/master/installv1.gradle'
 apply from: 'https://raw.githubusercontent.com/nuuneoi/JCenter/master/bintrayv1.gradle'
-
