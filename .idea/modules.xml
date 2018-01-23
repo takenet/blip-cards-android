@@ -2,9 +2,10 @@
 <project version="4">
   <component name="ProjectModuleManager">
     <modules>
+      <module fileurl="file://$PROJECT_DIR$/blip-cards-android.iml" filepath="$PROJECT_DIR$/blip-cards-android.iml" />
       <module fileurl="file://$PROJECT_DIR$/blip-cards-android/blip-cards-android-blip-cards-android.iml" filepath="$PROJECT_DIR$/blip-cards-android/blip-cards-android-blip-cards-android.iml" />
       <module fileurl="file://$PROJECT_DIR$/demo/demo.iml" filepath="$PROJECT_DIR$/demo/demo.iml" />
-      <module fileurl="file://$PROJECT_DIR$/projetos-blip-cards-android.iml" filepath="$PROJECT_DIR$/projetos-blip-cards-android.iml" />
+      <module fileurl="file://D:\Source\blip-cards-android\projetos-blip-cards-android.iml" filepath="D:\Source\blip-cards-android\projetos-blip-cards-android.iml" />
     </modules>
   </component>
 </project>
