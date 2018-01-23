@@ -402,3 +402,12 @@ Code:
 Result:
 
 <img src="./docs/resources/images/quick_reply.png" alt="Carousel" style="width: 400px;"/>
+
+## Guidelines
+
+Good practices for Images on BLiP Cards Android.
+
+Best dimensions for good user experience
+
+min-height = 190px
+min-width = 375px
