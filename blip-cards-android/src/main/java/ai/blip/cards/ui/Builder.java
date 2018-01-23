@@ -5,6 +5,7 @@ import android.view.View;
 import android.widget.LinearLayout;
 
 import org.limeprotocol.DocumentCollection;
+import org.limeprotocol.Envelope;
 import org.limeprotocol.Message;
 import org.limeprotocol.messaging.contents.ChatState;
 import org.limeprotocol.messaging.contents.DocumentSelect;
@@ -14,6 +15,8 @@ import org.limeprotocol.messaging.contents.MediaLink;
 import org.limeprotocol.messaging.contents.PlainText;
 import org.limeprotocol.messaging.contents.Select;
 import org.limeprotocol.messaging.contents.WebLink;
+import org.limeprotocol.serialization.EnvelopeSerializer;
+import org.limeprotocol.serialization.JacksonEnvelopeSerializer;
 
 import ai.blip.cards.controls.Carousel;
 import ai.blip.cards.controls.Media;
@@ -28,6 +31,7 @@ public class Builder extends LinearLayout {
         RIGHT
     }
 
+    private EnvelopeSerializer envelopeSerializer;
     private Message message;
     private String from;
     private String dateTime;
@@ -38,13 +42,18 @@ public class Builder extends LinearLayout {
     private ai.blip.cards.controls.Location.LocationListener listenerLocation;
 
     public Builder(Context context) {
-        super(context);
-        this.side = SIDE.LEFT;
+        this(context, SIDE.LEFT);
     }
 
     private Builder(Context context, SIDE side) {
         super(context);
         this.side = side;
+        this.envelopeSerializer = new JacksonEnvelopeSerializer();
+    }
+
+    public Builder setJSON(String jsonMessage) {
+        this.message = (Message) this.envelopeSerializer.deserialize(jsonMessage);
+        return this;
     }
 
     public Builder setMessage(Message message) {

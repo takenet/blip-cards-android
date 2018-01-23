@@ -21,6 +21,7 @@
     <string name="multimedia_menu_label">Menu Multimedia</string>
     <string name="carousel_label">Carousel</string>
     <string name="text_label">Text</string>
+    <string name="text_json_label">Text JSON</string>
     <string name="weblink_label">Web Link</string>
     <string name="quick_reply_label">Quick Reply</string>
     <string name="chatstate_label">Chat State</string>

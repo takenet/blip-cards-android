@@ -12,6 +12,7 @@ import android.widget.Toast;
 import org.limeprotocol.Document;
 import org.limeprotocol.DocumentCollection;
 import org.limeprotocol.DocumentContainer;
+import org.limeprotocol.EnvelopeId;
 import org.limeprotocol.MediaType;
 import org.limeprotocol.Message;
 import org.limeprotocol.messaging.contents.ChatState;
@@ -23,6 +24,7 @@ import org.limeprotocol.messaging.contents.PlainText;
 import org.limeprotocol.messaging.contents.Select;
 import org.limeprotocol.messaging.contents.SelectOption;
 import org.limeprotocol.messaging.contents.WebLink;
+import org.limeprotocol.util.StringUtils;
 
 import java.net.URI;
 
@@ -62,29 +64,32 @@ public class MainActivity extends AppCompatActivity {
         option3.setLabel(new DocumentContainer(new PlainText(getString(R.string.text_label))));
         option3.setOrder(3);
         DocumentSelectOption option4 = new DocumentSelectOption();
-        option4.setLabel(new DocumentContainer(new PlainText(getString(R.string.weblink_label))));
+        option4.setLabel(new DocumentContainer(new PlainText(getString(R.string.text_json_label))));
         option4.setOrder(4);
         DocumentSelectOption option5 = new DocumentSelectOption();
-        option5.setLabel(new DocumentContainer(new PlainText(getString(R.string.quick_reply_label))));
+        option5.setLabel(new DocumentContainer(new PlainText(getString(R.string.weblink_label))));
         option5.setOrder(5);
         DocumentSelectOption option6 = new DocumentSelectOption();
-        option6.setLabel(new DocumentContainer(new PlainText(getString(R.string.chatstate_label))));
+        option6.setLabel(new DocumentContainer(new PlainText(getString(R.string.quick_reply_label))));
         option6.setOrder(6);
         DocumentSelectOption option7 = new DocumentSelectOption();
-        option7.setLabel(new DocumentContainer(new PlainText(getString(R.string.location_label))));
+        option7.setLabel(new DocumentContainer(new PlainText(getString(R.string.chatstate_label))));
         option7.setOrder(7);
         DocumentSelectOption option8 = new DocumentSelectOption();
-        option8.setLabel(new DocumentContainer(new PlainText(getString(R.string.media_audio_label))));
+        option8.setLabel(new DocumentContainer(new PlainText(getString(R.string.location_label))));
         option8.setOrder(8);
         DocumentSelectOption option9 = new DocumentSelectOption();
-        option9.setLabel(new DocumentContainer(new PlainText(getString(R.string.media_video_label))));
+        option9.setLabel(new DocumentContainer(new PlainText(getString(R.string.media_audio_label))));
         option9.setOrder(9);
         DocumentSelectOption option10 = new DocumentSelectOption();
-        option10.setLabel(new DocumentContainer(new PlainText(getString(R.string.media_image_label))));
+        option10.setLabel(new DocumentContainer(new PlainText(getString(R.string.media_video_label))));
         option10.setOrder(10);
         DocumentSelectOption option11 = new DocumentSelectOption();
-        option11.setLabel(new DocumentContainer(new PlainText(getString(R.string.media_document_label))));
+        option11.setLabel(new DocumentContainer(new PlainText(getString(R.string.media_image_label))));
         option11.setOrder(11);
+        DocumentSelectOption option12 = new DocumentSelectOption();
+        option12.setLabel(new DocumentContainer(new PlainText(getString(R.string.media_document_label))));
+        option12.setOrder(12);
 
         DocumentSelectOption[] options = new DocumentSelectOption[11];
         options[0] = option1;
@@ -98,6 +103,7 @@ public class MainActivity extends AppCompatActivity {
         options[8] = option9;
         options[9] = option10;
         options[10] = option11;
+        options[11] = option12;
 
         DocumentSelect select = new DocumentSelect();
         select.setHeader(new DocumentContainer(new PlainText("Select one option")));
@@ -118,20 +124,22 @@ public class MainActivity extends AppCompatActivity {
                         } else if (i == 2) {
                             textClick();
                         } else if (i == 3) {
-                            webLinkClick();
+                            textJsonClick();
                         } else if (i == 4) {
-                            quickReplyClick();
+                            webLinkClick();
                         } else if (i == 5) {
-                            chatStateClick();
+                            quickReplyClick();
                         } else if (i == 6) {
-                            locationClick();
+                            chatStateClick();
                         } else if (i == 7) {
-                            audioClick();
+                            locationClick();
                         } else if (i == 8) {
-                            videoClick();
+                            audioClick();
                         } else if (i == 9) {
-                            imageClick();
+                            videoClick();
                         } else if (i == 10) {
+                            imageClick();
+                        } else if (i == 11) {
                             documentClick();
                         }
                     }
@@ -377,6 +385,47 @@ public class MainActivity extends AppCompatActivity {
         View v = new BlipCard(this)
                 .right()
                 .setMessage(m)
+                .setFrom(getString(R.string.virtual_assistant))
+                .setMenuMultimediaClickListener(new MenuMultimedia.MenuMultimediaListener() {
+                    @Override
+                    public void onItemClick(DocumentSelectOption documentSelectOption, int i) {
+                        Toast.makeText(getBaseContext(), "" + i, Toast.LENGTH_SHORT).show();
+                    }
+                })
+                .setDateTime(getString(R.string.time_of_day))
+                .build();
+
+        content.addView(v);
+
+        sendToDown();
+    }
+
+    public void textJsonClick() {
+
+        String id = EnvelopeId.newId();
+        String from = getString(R.string.virtual_assistant);
+        String randomKey1 = "randomString1";
+        String randomKey2 = "randomString2";
+        String randomString1 = "xpto";
+        String randomString2 = "xpto";
+
+        String text = getString(R.string.clear_everything_up);
+
+        String json = StringUtils.format(
+                "{\"type\":\"text/plain\",\"content\":\"{0}\",\"id\":\"{1}\",\"from\":\"{2}\",\"to\":\"{3}\",\"metadata\":{\"{4}\":\"{5}\",\"{6}\":\"{7}\"}}",
+                text,
+                id,
+                from,
+                from,
+                randomKey1,
+                randomString1,
+                randomKey2,
+                randomString2
+        );
+
+        View v = new BlipCard(this)
+                .right()
+                .setJSON(json)
                 .setFrom(getString(R.string.virtual_assistant))
                 .setMenuMultimediaClickListener(new MenuMultimedia.MenuMultimediaListener() {
                     @Override
