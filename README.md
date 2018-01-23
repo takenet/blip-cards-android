@@ -48,7 +48,7 @@ Result:
 
 ## Text
 ### Example:
-Code:
+Code (using type):
 ```
     PlainText p = new PlainText("Clear up everything related to the proposal, SMS code, vehicle model, etc.");
 
@@ -67,6 +67,36 @@ Code:
         })
         .setDateTime("15:15")
         .build();
+```
+
+Code (using JSON):
+```
+    String text = "Clear up everything related to the proposal, SMS code, vehicle model, etc.";
+
+    String json = StringUtils.format(
+        "{\"type\":\"text/plain\",\"content\":\"{0}\",\"id\":\"{1}\",\"from\":\"{2}\",\"to\":\"{3}\",\"metadata\":{\"{4}\":\"{5}\",\"{6}\":\"{7}\"}}",
+            text,
+            "id",
+            "from",
+            "to",
+            "randomKey1",
+            "randomString1",
+            "randomKey2",
+            "randomString2"
+        );
+
+    View v = new BlipCard(this)
+        .right()
+                .setJSON(json)
+                .setFrom("Assistente Virtual")
+                .setMenuMultimediaClickListener(new MenuMultimedia.MenuMultimediaListener() {
+                    @Override
+                    public void onItemClick(DocumentSelectOption documentSelectOption, int i) {
+                        Toast.makeText(getBaseContext(), "" + i, Toast.LENGTH_SHORT).show();
+                    }
+                })
+                .setDateTime("15:15")
+                .build();
 ```
 
 Result:
