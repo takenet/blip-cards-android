@@ -91,7 +91,7 @@ public class MainActivity extends AppCompatActivity {
         option12.setLabel(new DocumentContainer(new PlainText(getString(R.string.media_document_label))));
         option12.setOrder(12);
 
-        DocumentSelectOption[] options = new DocumentSelectOption[11];
+        DocumentSelectOption[] options = new DocumentSelectOption[12];
         options[0] = option1;
         options[1] = option2;
         options[2] = option3;
